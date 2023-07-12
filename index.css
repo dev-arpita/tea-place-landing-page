@@ -1,7 +1,10 @@
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
+
 body {
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
@@ -15,62 +18,84 @@ header {
     align-items: center;
     padding: 1rem 2rem;
 }
+
 a {
     text-decoration: none;
     color: #000;
     font-weight: bold;
     padding-bottom: 2px;
 }
+
 .active a {
     color: #47946E;
     border-bottom: 2px solid #7A4900
 }
+
 ul {
     list-style-type: none;
 }
- ul{
-        display: grid;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        padding: 0;
-        margin: 0;
-        width: 100%;
-        height: 100vh;
-        position: absolute;
-        background: #fff;
-        z-index: 2;
-    }
-    .active a {
-        border: 0;
-    }
+
+li a {
+    font-size: 1.1rem;
+}
+
+ul {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    justify-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    background: #fff;
+    z-index: 2;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out;
+}
+
+.active a {
+    border: 0;
+}
+
+.open-nav {
+    transform: translateX(0)
+}
 
 .logo {
     font-size: 1.5rem;
     color: #47946E;
     font-weight: bold;
 }
+
 .menu,
 .exit {
-    width: 2rem;
+    width: 1.5rem;
     cursor: pointer;
 }
-.exit {
-    width: 1rem;
+
+.menu {
+    padding: 0.5rem;
 }
-#nav {
-    /* display: none; */
+
+#exit-btn {
+    justify-self: end;
+    align-self: start;
+    padding: 1rem 2rem 1rem 0;
 }
+
 .content-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
     padding: 0 2rem;
     text-align: center;
     height: 100vh;
     color: #7A4900;
 }
+
 .fern {
+    background: url('fern.svg') no-repeat;
     position: absolute;
     width: 50%;
     top: 10%;
@@ -78,23 +103,28 @@ ul {
     z-index: -1;
     opacity: 0.1;
 }
+
 h1 {
     margin-top: 3.5rem;
 }
+
 p {
     line-height: 1.5;
 }
+
 .btn-container {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     gap: 10px;
     margin-top: 2rem;
 }
+
 .cta {
     color: #7A4900;
     background: #fff;
     display: block;
-    padding: 1rem ;
+    padding: 1rem 2rem;
     border: 1px solid #7A4900;
     font-weight: 900;
     letter-spacing: 1px;
@@ -104,12 +134,13 @@ p {
 .plant-container {
     overflow: hidden;
     position: absolute;
-        right: 0;
-        bottom: 0;
+    right: 0;
+    bottom: 0;
     width: 100%;
     height: 100%;
-
+    z-index: -1;
 }
+
 .plant {
     width: 400px;
     position: absolute;
@@ -119,57 +150,97 @@ p {
 
 @media screen and (min-width:600px) {
     body {
-         overflow: hidden;
-    }
-    .content-wrapper {
-        width: 80%;
-        margin: 2rem auto;
-    }
-     .btn-container{
-        width: 50%;
-        margin: 3rem auto;
-     }
-}
-@media screen and (min-width:900px) {
-
-    .content-wrapper {
-         width: 100%;
-        display: grid;
-        grid-template-columns: 60% auto;
-        text-align: start;
-        margin-top: 4rem;
-        font-size: 1.2rem ;
+        overflow: hidden;
     }
 
-    #nav {
-        display: flex;
-        column-gap: 2rem;
-    }
     .menu,
     .exit {
         display: none;
     }
 
-    h1 {
-        font-size: 3rem;
-    }
-    .fern{
-        width: 40%;
-        top: 150px;
-    }
-    .btn-container {
+    ul {
+        position: unset;
+        height: fit-content;
+        width: auto;
+        margin: 0 auto;
+        background: inherit;
+        column-gap: 3rem;
         display: flex;
-        width: 100%;
-        flex-direction: row;
-        gap: 10px;
+        transform: translateX(0%);
+    }
+
+    .content-wrapper {
+        width: 90%;
+        margin: 2rem auto;
+    }
+
+    .btn-container {
+        width: 50%;
+        margin: 3rem auto;
+    }
+
+    h1 {
         margin-top: 4rem;
+        margin-bottom: 2rem;
+        font-size: 2.5rem;
+    }
+
+    .plant-container {
+        width: 650px;
+        position: absolute;
+        /* bottom: -%; */
+        right: -30%;
+        top: 55%;
     }
 
     .plant {
-        width: 750px;
-        position: absolute;
-        right: -355px;
-        bottom: 0;
-        top: 20%;
+        position: unset;
+        width: 100%;
     }
+
+}
+
+@media screen and (min-width:900px) {
+    .left-col {
+        position: absolute;
+        height: 100vh;
+        width: 60%;
+        background: white;
+        z-index: -1;
+    }
+    .content-wrapper {
+        /* width: 70%; */
+        display: flex;
+        text-align: start;
+        margin-top: 4rem;
+        font-size: 1.2rem;
+    }
+    .outline {
+        background: #AADFC5;
+    }
+
+    h1 {
+        font-size: 2.8rem;
+    }
+    p{
+        width: 90%;
+    }
+    .fern {
+        width: 40%;
+        top: 150px;
+    }
+
+    .btn-container {
+        width: 100%;
+        flex-direction: row;
+        gap: 2rem;
+        margin-top: 4rem;
+    }
+
+    .plant-container {
+        margin-top: 3rem;
+        position: unset;
+        width: 100%;
+    }
+
 }
